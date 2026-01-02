@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<h1>{{ page.title }}</h1>
+<div class="content">
+    {{ page.content|linebreaks }}
+</div>
+
+{% if children %}
+    <h2>Sub-pages</h2>
+    <ul>
+        {% for child in children %}
+        <li><a href="{{ child.get_absolute_url }}">{{ child.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}
