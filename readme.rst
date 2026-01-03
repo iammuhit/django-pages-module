@@ -1,1 +1,3 @@
-## Django — Pages Module
+=====================
+Django — Pages Module
+=====================
