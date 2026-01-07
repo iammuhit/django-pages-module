@@ -12,10 +12,11 @@ class PageView(generic.DetailView):
     
     def get_object(self):
         path = self.kwargs.get('path', '').strip('/')
+        path = f'/{path}'
 
-        if not path:
-            page = Page.objects.get(Q(path='/') | Q(is_home=True))
+        if path == '/':
+            page = Page.objects.get(Q(path=path) | Q(is_home=True))
         else:
-            page = Page.objects.get(path='/' + path)
+            page = Page.objects.get(path=path, is_home=False)
 
         return page

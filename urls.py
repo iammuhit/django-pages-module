@@ -7,6 +7,5 @@ app_name = 'app.modules.pages'
 
 urlpatterns = [
     path('', views.PageView.as_view(), name='pages.home'),
-    path('home/', RedirectView.as_view(url='/', permanent=True), name='pages.home'),
-    path('<str:path>/', views.PageView.as_view(), name='pages.view'),
+    path('<path:path>/', views.PageView.as_view(), name='pages.view'),
 ]

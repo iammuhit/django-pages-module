@@ -1,4 +1,3 @@
-from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -39,7 +38,7 @@ class Page(models.Model):
     slug       = models.SlugField(max_length=255, unique=True)
     path       = models.CharField(max_length=255, unique=True, editable=False)
     route_name = models.CharField(max_length=255, unique=True, editable=True)
-    content    = RichTextField(blank=True)
+    content    = models.TextField(blank=True)
 
     is_enabled = models.BooleanField(default=True, verbose_name='Enabled', help_text='Is this page enabled?')
     is_home    = models.BooleanField(default=False, verbose_name='Home Page', help_text='The home page is the default landing page for the website.')
@@ -73,17 +72,13 @@ class Page(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('app.modules.pages:pages.view', kwargs={'path': self.path})
+        if self.is_home:
+            return reverse('app.modules.pages:pages.home')
+        
+        return reverse('app.modules.pages:pages.view', kwargs={'path': self.path.strip('/')})
     
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-
-        if self.is_home:
-            self.path = '/'
-            self.route_name = 'app.modules.pages:pages.home'
-        else:
-            self.path = '/' + self.slug
-            self.route_name = 'app.modules.pages:pages.' + str(self.id)
-
+        self.slug = self.slug or slugify(self.title)
+        self.path = f'/{self.slug.strip('/')}'
+        self.route_name = 'app.modules.pages:pages.home' if self.is_home else 'app.modules.pages:pages.' + str(self.id)
         super().save(*args, **kwargs)
