@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools >= 80.0", "mayacms @ git+https://github.com/mayacms/mayacms.git"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src/"]
+include = ["mayacms.contrib.*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "mayacms.contrib.pages.__version__"}
+
+[project]
+name = "mayacms-pages-module"
+dynamic = ["version"]
+requires-python = ">= 3.14"
+authors = [{name = "Nurul Amin Muhit", email = "me@muhit.me"}]
+maintainers = [{name = "Mayarun Labs", email = "hello@mayarun.io"}]
+description = "The pages module for MayaCMS."
+readme = {file = "readme.rst", content-type = "text/x-rst"}
+license = { file = "license.txt" }
+keywords = ["django", "mayacms", "modules", "pages"]
+dependencies = ["mayacms >= 0.1"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Environment :: Plugins",
+    "Framework :: Django",
+    "Framework :: Django :: 6.0",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development",
+]
+
+[project.urls]
+Homepage = "https://muhit.me"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/iammuhit/django-pages-module.git"
