@@ -3,8 +3,9 @@ requires = ["setuptools >= 80.0", "mayacms @ git+https://github.com/mayacms/maya
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src/"]
-include = ["mayacms.contrib.*"]
+namespaces = true
+where = ["src"]
+include = ["mayacms*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "mayacms.contrib.pages.__version__"}
