@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.modules.pages.models import Page, Type
+from mayacms.contrib.pages.models import Page, Type
 
 
 @admin.register(Type)

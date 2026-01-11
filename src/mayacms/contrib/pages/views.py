@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views import generic
 
-from app.modules.pages.models import Page
+from mayacms.contrib.pages.models import Page
 
 
 class PageView(generic.DetailView):

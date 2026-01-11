@@ -25,7 +25,7 @@ class Type(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('app.modules.pages:types.view', kwargs={'slug': self.slug})
+        return reverse('mayacms.contrib.pages:types.view', kwargs={'slug': self.slug})
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -73,12 +73,12 @@ class Page(models.Model):
     
     def get_absolute_url(self):
         if self.is_home:
-            return reverse('app.modules.pages:pages.home')
+            return reverse('mayacms.contrib.pages:pages.home')
         
-        return reverse('app.modules.pages:pages.view', kwargs={'path': self.path.strip('/')})
+        return reverse('mayacms.contrib.pages:pages.view', kwargs={'path': self.path.strip('/')})
     
     def save(self, *args, **kwargs):
         self.slug = self.slug or slugify(self.title)
         self.path = f'/{self.slug.strip('/')}'
-        self.route_name = 'app.modules.pages:pages.home' if self.is_home else 'app.modules.pages:pages.' + str(self.id)
+        self.route_name = 'mayacms.contrib.pages:pages.home' if self.is_home else 'mayacms.contrib.pages:pages.' + str(self.id)
         super().save(*args, **kwargs)
