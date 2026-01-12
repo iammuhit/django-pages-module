@@ -1,1 +1,6 @@
-__version__ = '0.1.0'
+from django.conf import settings
+from django.utils.version import get_version
+
+VERSION = (0, 2, 0, 'alpha', 0)
+
+__version__ = 'v0.2.0'
